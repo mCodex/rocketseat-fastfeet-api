@@ -10,7 +10,8 @@ const routes = new Router();
 routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
+
 routes.post('/recipients', RecipientController.store);
-// routes.put('/recipients', RecipientController.update);
+routes.put('/recipients', RecipientController.update);
 
 export default routes;
