@@ -5,9 +5,7 @@ class RecipientController {
     async store(req, res) {
         const schemaValidation = Yup.object().shape({
             name: Yup.string().required(),
-            street: Yup.string()
-                .string()
-                .required(),
+            street: Yup.string().required(),
             street_number: Yup.string().required(),
             state: Yup.string().required(),
             city: Yup.string().required(),
@@ -21,20 +19,18 @@ class RecipientController {
         }
 
         const userExists = await Recipient.findOne({
-            where: { email: req.body.email }
+            where: { name: req.body.name }
         });
 
         if (userExists) {
             return res.status(400).json({ error: 'Recipient already exists' });
         }
 
-        const { id, name, email, provider } = await Recipient.create(req.body);
+        const { id, name } = await Recipient.create(req.body);
 
         return res.json({
             id,
-            name,
-            email,
-            provider
+            name
         });
     }
 }
